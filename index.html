@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Meta Grab WA -->
+<title>Surat Untuk Kamu</title>
+<meta property="og:title" content="Ada surat buat kamu ❤️">
+<meta property="og:description" content="Buka ya, penting banget. Dari SDEV">
+<meta property="og:image" content="https://raw.githubusercontent.com/Sdeveandteam/buatkamu/main/preview.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#667eea">
+
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Georgia', serif;
+    padding: 20px;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.97);
+    padding: 40px 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    animation: fadeIn 1s ease;
+  }
+
+  h1 {
+    color: #5a4a7a;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: #333;
+    font-size: 1.15em;
+    line-height: 1.9;
+    margin-bottom: 25px;
+    min-height: 60px;
+  }
+
+  button {
+    padding: 12px 35px;
+    font-size: 1em;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    cursor: pointer;
+    margin: 8px;
+    transition: 0.3s;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  #btn-run {
+    position: relative;
+    background: #ff6b6b;
+  }
+
+  video {
+    width: 100%;
+    max-height: 250px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    object-fit: cover;
+  }
+
+  .footer {
+    margin-top: 30px;
+    font-size: 0.85em;
+    color: #888;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .hidden { display: none; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    
+    <!-- STEP 1 -->
+    <div id="step-1">
+      <h1>Surat Terbuka</h1>
+      <p>Untuk kamu yang lagi baca ini sekarang...<br>
+      Aku ada sesuatu yang pengen aku sampaikan dari hati.</p>
+      <button onclick="nextStep(2)">Buka Surat</button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step-2" class="hidden">
+      <p>Sejak kamu ada, hari-hariku yang biasanya biasa aja jadi punya warna. 
+      Ketawa kamu tuh kayak alarm yang bikin aku pengen bangun pagi setiap hari.</p>
+      <button onclick="nextStep(3)">Lanjut</button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step-3" class="hidden">
+      <p>Aku nggak janji sempurna. Tapi aku janji bakal coba jadi orang yang bikin kamu nggak nyesel 
+      milih aku. Yang selalu ada pas kamu butuh, yang dengerin semua cerita kamu.</p>
+      <button onclick="nextStep(4)">Lanjut</button>
+    </div>
+
+    <!-- STEP 4 -->
+    <div id="step-4" class="hidden">
+      <video controls autoplay muted loop>
+        <source src="https://raw.githubusercontent.com/Sdeveandteam/buatkamu/main/vidio.mp4" type="video/mp4">
+        Browser kamu nggak support video.
+      </video>
+      
+      <p style="font-size: 1.3em; font-weight: bold; color: #5a4a7a;">
+        Jadi... mau tetap sama aku?
+      </p>
+      
+      <button id="btn-yes" onclick="sendWA(true)">Mau</button>
+      <button id="btn-run" onmouseover="kabur()" onclick="kabur()">Nggak</button>
+    </div>
+
+    <!-- COPYRIGHT -->
+    <div class="footer">
+      © 2026 SDEV. Made with ❤️
+    </div>
+
+  </div>
+
+<script>
+let step = 1;
+const nomorWA = "62895351432524"; // Udah gue ubah ke format 62
+const pesanWA = "Aku udah baca suratnya...";
+
+function nextStep(n) {
+  document.getElementById('step-' + step).classList.add('hidden');
+  document.getElementById('step-' + n).classList.remove('hidden');
+  step = n;
+}
+
+function sendWA(isYes) {
+  let pesan = isYes ? pesanWA + " Aku mau 😊" : pesanWA + " Aku mikir dulu deh...";
+  window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
+}
+
+function kabur() {
+  let btn = document.getElementById('btn-run');
+  let x = Math.random() * (window.innerWidth - 150);
+  let y = Math.random() * (window.innerHeight - 100);
+  btn.style.position = 'fixed';
+  btn.style.left = x + 'px';
+  btn.style.top = y + 'px';
+  btn.style.animation = 'shake 0.3s';
+}
+</script>
+</body>
+  </html>
