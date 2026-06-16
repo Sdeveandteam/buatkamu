@@ -10,91 +10,133 @@
 <meta property="og:description" content="Buka ya, penting banget. Dari SDEV">
 <meta property="og:image" content="https://raw.githubusercontent.com/Sdeveandteam/buatkamu/main/preview.jpg">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#667eea">
+<meta name="theme-color" content="#000">
+
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-  
+
   body {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Georgia', serif;
+    position: relative;
+  }
+
+  /* Video Background */
+  #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.6);
+  }
+
+ .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: -1;
+  }
+
+ .container {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    font-family: 'Georgia', serif;
     padding: 20px;
   }
 
-  .card {
-    background: rgba(255, 255, 255, 0.97);
-    padding: 40px 30px;
+ .card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px 25px;
     border-radius: 20px;
-    max-width: 500px;
+    max-width: 420px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    animation: fadeIn 1s ease;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
   }
 
   h1 {
     color: #5a4a7a;
-    font-size: 1.8em;
+    font-size: 1.7em;
     margin-bottom: 20px;
   }
 
   p {
     color: #333;
-    font-size: 1.15em;
-    line-height: 1.9;
+    font-size: 1.1em;
+    line-height: 1.8;
     margin-bottom: 25px;
     min-height: 60px;
   }
 
-  button {
-    padding: 12px 35px;
-    font-size: 1em;
-    border: none;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    cursor: pointer;
-    margin: 8px;
-    transition: 0.3s;
-    font-family: 'Georgia', serif;
-    font-weight: bold;
+ .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid #5a4a7a;
+    white-space: normal;
+    animation: blink 0.7s step-end infinite;
   }
 
-  button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+
+ .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+ .wa-btn {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+    background: #25D366;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+ .wa-btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+  }
+
+ .wa-btn svg {
+    width: 35px;
+    height: 35px;
+    fill: white;
   }
 
   #btn-run {
     position: relative;
-    background: #ff6b6b;
+    background: #ff4757;
   }
 
-  video {
-    width: 100%;
-    max-height: 250px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    object-fit: cover;
-  }
-
-  .footer {
-    margin-top: 30px;
-    font-size: 0.85em;
-    color: #888;
+ .footer {
+    margin-top: 25px;
+    font-size: 0.8em;
+    color: #666;
     font-family: 'Segoe UI', sans-serif;
   }
 
-  .hidden { display: none; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
+ .hidden { display: none; }
 
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
@@ -104,71 +146,112 @@
 </style>
 </head>
 <body>
-  <div class="card">
-    
-    <!-- STEP 1 -->
-    <div id="step-1">
-      <h1>Surat Terbuka</h1>
-      <p>Untuk kamu yang lagi baca ini sekarang...<br>
-      Aku ada sesuatu yang pengen aku sampaikan dari hati.</p>
-      <button onclick="nextStep(2)">Buka Surat</button>
-    </div>
 
-    <!-- STEP 2 -->
-    <div id="step-2" class="hidden">
-      <p>Sejak kamu ada, hari-hariku yang biasanya biasa aja jadi punya warna. 
-      Ketawa kamu tuh kayak alarm yang bikin aku pengen bangun pagi setiap hari.</p>
-      <button onclick="nextStep(3)">Lanjut</button>
-    </div>
+  <!-- Video Background -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="https://raw.githubusercontent.com/Sdeveandteam/buatkamu/main/vidio.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
 
-    <!-- STEP 3 -->
-    <div id="step-3" class="hidden">
-      <p>Aku nggak janji sempurna. Tapi aku janji bakal coba jadi orang yang bikin kamu nggak nyesel 
-      milih aku. Yang selalu ada pas kamu butuh, yang dengerin semua cerita kamu.</p>
-      <button onclick="nextStep(4)">Lanjut</button>
-    </div>
+  <div class="container">
+    <div class="card" data-aos="zoom-in" data-aos-duration="800">
 
-    <!-- STEP 4 -->
-    <div id="step-4" class="hidden">
-      <video controls autoplay muted loop>
-        <source src="https://raw.githubusercontent.com/Sdeveandteam/buatkamu/main/vidio.mp4" type="video/mp4">
-        Browser kamu nggak support video.
-      </video>
-      
-      <p style="font-size: 1.3em; font-weight: bold; color: #5a4a7a;">
-        Jadi... mau tetap sama aku?
-      </p>
-      
-      <button id="btn-yes" onclick="sendWA(true)">Mau</button>
-      <button id="btn-run" onmouseover="kabur()" onclick="kabur()">Nggak</button>
-    </div>
+      <!-- STEP 1 -->
+      <div id="step-1">
+        <h1 data-aos="fade-down">Surat Terbuka</h1>
+        <p id="text-1"></p>
+        <button onclick="nextStep(2)" style="padding:12px 35px; border:none; border-radius:50px; background:linear-gradient(135deg, #667eea, #764ba2); color:white; cursor:pointer; font-family:Georgia; font-weight:bold;">Buka Surat</button>
+      </div>
 
-    <!-- COPYRIGHT -->
-    <div class="footer">
-      © 2026 SDEV. Made with ❤️
-    </div>
+      <!-- STEP 2 -->
+      <div id="step-2" class="hidden">
+        <p id="text-2"></p>
+        <button onclick="nextStep(3)" style="padding:12px 35px; border:none; border-radius:50px; background:linear-gradient(135deg, #667eea, #764ba2); color:white; cursor:pointer; font-family:Georgia; font-weight:bold;">Lanjut</button>
+      </div>
 
+      <!-- STEP 3 -->
+      <div id="step-3" class="hidden">
+        <p id="text-3"></p>
+        <button onclick="nextStep(4)" style="padding:12px 35px; border:none; border-radius:50px; background:linear-gradient(135deg, #667eea, #764ba2); color:white; cursor:pointer; font-family:Georgia; font-weight:bold;">Lanjut</button>
+      </div>
+
+      <!-- STEP 4 -->
+      <div id="step-4" class="hidden">
+        <p id="text-4" style="font-size: 1.3em; font-weight: bold; color: #5a4a7a;"></p>
+
+        <div class="btn-group">
+          <button class="wa-btn" onclick="sendWA(true)" title="Mau" data-aos="fade-right">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.296-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0.16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488z"/></svg>
+          </button>
+
+          <button id="btn-run" class="wa-btn" onmouseover="kabur()" onclick="kabur()" title="Nggak" data-aos="fade-left">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.296-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0.16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- COPYRIGHT -->
+      <div class="footer">
+        © 2026 SDEV. Made with ❤️
+      </div>
+
+    </div>
   </div>
 
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+AOS.init();
+
 let step = 1;
-const nomorWA = "62895351432524"; // Udah gue ubah ke format 62
+const nomorWA = "62895351432524";
 const pesanWA = "Aku udah baca suratnya...";
+
+const texts = {
+ 1: "Untuk kamu yang lagi baca ini sekarang...<br>Aku ada sesuatu yang pengen aku sampaikan dari hati.",
+ 2: "Sejak kamu ada, hari-hariku yang biasanya biasa aja jadi punya warna. Ketawa kamu tuh kayak alarm yang bikin aku pengen bangun pagi setiap hari.",
+ 3: "Aku nggak janji sempurna. Tapi aku janji bakal coba jadi orang yang bikin kamu nggak nyesel milih aku. Yang selalu ada pas kamu butuh, yang dengerin semua cerita kamu.",
+ 4: "Jadi... mau tetap sama aku?"
+};
+
+function typeWriter(elementId, text, speed = 50) {
+  let i = 0;
+  const element = document.getElementById(elementId);
+  element.innerHTML = '<span class="typewriter"></span>';
+  const span = element.querySelector('.typewriter');
+
+  function typing() {
+    if (i < text.length) {
+      span.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    } else {
+      span.style.borderRight = 'none';
+    }
+  }
+  typing();
+}
 
 function nextStep(n) {
   document.getElementById('step-' + step).classList.add('hidden');
   document.getElementById('step-' + n).classList.remove('hidden');
   step = n;
+  typeWriter('text-' + n, texts[n], 40);
 }
 
+// Auto type step 1 saat load
+window.onload = () => {
+  typeWriter('text-1', texts[1], 40);
+};
+
 function sendWA(isYes) {
-  let pesan = isYes ? pesanWA + " Aku mau 😊" : pesanWA + " Aku mikir dulu deh...";
+  let pesan = isYes? pesanWA + " Aku mau 😊" : pesanWA + " Aku mikir dulu deh...";
   window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
 }
 
 function kabur() {
   let btn = document.getElementById('btn-run');
-  let x = Math.random() * (window.innerWidth - 150);
+  let x = Math.random() * (window.innerWidth - 100);
   let y = Math.random() * (window.innerHeight - 100);
   btn.style.position = 'fixed';
   btn.style.left = x + 'px';
@@ -177,4 +260,4 @@ function kabur() {
 }
 </script>
 </body>
-  </html>
+</html>
