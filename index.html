@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Meta Grab WA -->
 <title>Surat Untuk Kamu</title>
 <meta property="og:title" content="Ada surat buat kamu ❤️">
 <meta property="og:description" content="Buka ya, penting banget. Dari SDEV">
@@ -12,7 +11,6 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#000">
 
-<!-- AOS CSS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
@@ -25,7 +23,6 @@
     position: relative;
   }
 
-  /* Video Background */
   #bg-video {
     position: fixed;
     top: 0;
@@ -34,7 +31,7 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    filter: brightness(0.6);
+    filter: brightness(0.5);
   }
 
  .overlay {
@@ -43,8 +40,28 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.5);
     z-index: -1;
+  }
+
+  #sound-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9em;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+  }
+
+  #sound-btn:hover {
+    background: rgba(255,255,255,0.25);
   }
 
  .container {
@@ -56,34 +73,36 @@
   }
 
  .card {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 35px 25px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 35px 25px 25px 25px;
     border-radius: 20px;
-    max-width: 420px;
+    max-width: 380px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
   }
 
   h1 {
-    color: #5a4a7a;
+    color: #fff;
     font-size: 1.7em;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
   }
 
   p {
-    color: #333;
+    color: #fff;
     font-size: 1.1em;
     line-height: 1.8;
     margin-bottom: 25px;
     min-height: 60px;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
   }
 
  .typewriter {
     display: inline-block;
     overflow: hidden;
-    border-right: 2px solid #5a4a7a;
+    border-right: 2px solid #fff;
     white-space: normal;
     animation: blink 0.7s step-end infinite;
   }
@@ -95,13 +114,14 @@
  .btn-group {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin-top: 20px;
+    gap: 25px;
+    margin-top: 35px;
+    margin-bottom: 15px;
   }
 
  .wa-btn {
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: none;
     background: #25D366;
@@ -110,17 +130,16 @@
     align-items: center;
     justify-content: center;
     transition: 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   }
 
  .wa-btn:hover {
     transform: scale(1.15);
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
   }
 
  .wa-btn svg {
-    width: 35px;
-    height: 35px;
+    width: 28px;
+    height: 28px;
     fill: white;
   }
 
@@ -130,9 +149,9 @@
   }
 
  .footer {
-    margin-top: 25px;
-    font-size: 0.8em;
-    color: #666;
+    margin-top: 20px;
+    font-size: 0.75em;
+    color: rgba(255,255,255,0.6);
     font-family: 'Segoe UI', sans-serif;
   }
 
@@ -143,41 +162,61 @@
     25% { transform: translateX(-5px); }
     75% { transform: translateX(5px); }
   }
+
+  button.main-btn {
+    padding: 12px 35px;
+    border:none;
+    border-radius:50px;
+    background:rgba(255,255,255,0.15);
+    color:white;
+    cursor:pointer;
+    font-family:Georgia;
+    font-weight:bold;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: 0.3s;
+  }
+
+  button.main-btn:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+  }
 </style>
 </head>
 <body>
 
-  <!-- Video Background -->
   <video id="bg-video" autoplay muted loop playsinline>
     <source src="https://raw.githubusercontent.com/Sdeveandteam/buatkamu/main/vidio.mp4" type="video/mp4">
   </video>
   <div class="overlay"></div>
 
+  <audio id="bg-audio" loop>
+    <source src="https://raw.githubusercontent.com/Sdeveandteam/buatkamu/main/Sabar%20-%20Sadewok%20Official%20Music%20Video.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="sound-btn" onclick="toggleSound()">🔇 Nyalain Lagu</button>
+
   <div class="container">
     <div class="card" data-aos="zoom-in" data-aos-duration="800">
 
-      <!-- STEP 1 -->
       <div id="step-1">
         <h1 data-aos="fade-down">Surat Terbuka</h1>
         <p id="text-1"></p>
-        <button onclick="nextStep(2)" style="padding:12px 35px; border:none; border-radius:50px; background:linear-gradient(135deg, #667eea, #764ba2); color:white; cursor:pointer; font-family:Georgia; font-weight:bold;">Buka Surat</button>
+        <button class="main-btn" onclick="nextStep(2)">Buka Surat</button>
       </div>
 
-      <!-- STEP 2 -->
       <div id="step-2" class="hidden">
         <p id="text-2"></p>
-        <button onclick="nextStep(3)" style="padding:12px 35px; border:none; border-radius:50px; background:linear-gradient(135deg, #667eea, #764ba2); color:white; cursor:pointer; font-family:Georgia; font-weight:bold;">Lanjut</button>
+        <button class="main-btn" onclick="nextStep(3)">Lanjut</button>
       </div>
 
-      <!-- STEP 3 -->
       <div id="step-3" class="hidden">
         <p id="text-3"></p>
-        <button onclick="nextStep(4)" style="padding:12px 35px; border:none; border-radius:50px; background:linear-gradient(135deg, #667eea, #764ba2); color:white; cursor:pointer; font-family:Georgia; font-weight:bold;">Lanjut</button>
+        <button class="main-btn" onclick="nextStep(4)">Lanjut</button>
       </div>
 
-      <!-- STEP 4 -->
       <div id="step-4" class="hidden">
-        <p id="text-4" style="font-size: 1.3em; font-weight: bold; color: #5a4a7a;"></p>
+        <p id="text-4" style="font-size: 1.3em; font-weight: bold;"></p>
 
         <div class="btn-group">
           <button class="wa-btn" onclick="sendWA(true)" title="Mau" data-aos="fade-right">
@@ -188,22 +227,23 @@
             <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.296-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0.16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488z"/></svg>
           </button>
         </div>
-      </div>
 
-      <!-- COPYRIGHT -->
-      <div class="footer">
-        © 2026 SDEV. Made with ❤️
+        <div class="footer">
+          © 2026 SDEV. Made with ❤️
+        </div>
       </div>
 
     </div>
   </div>
 
-<!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
 AOS.init();
 
 let step = 1;
+let soundOn = false;
+const video = document.getElementById('bg-video');
+const audio = document.getElementById('bg-audio');
 const nomorWA = "62895351432524";
 const pesanWA = "Aku udah baca suratnya...";
 
@@ -239,7 +279,20 @@ function nextStep(n) {
   typeWriter('text-' + n, texts[n], 40);
 }
 
-// Auto type step 1 saat load
+function toggleSound() {
+  soundOn =!soundOn;
+  video.muted =!soundOn;
+  audio.muted =!soundOn;
+
+  if(soundOn) {
+    audio.play();
+    document.getElementById('sound-btn').innerHTML = '🔊 Lagu Nyala';
+  } else {
+    audio.pause();
+    document.getElementById('sound-btn').innerHTML = '🔇 Nyalain Lagu';
+  }
+}
+
 window.onload = () => {
   typeWriter('text-1', texts[1], 40);
 };
