@@ -34,7 +34,7 @@
     filter: brightness(0.5);
   }
 
- .overlay {
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -64,7 +64,7 @@
     background: rgba(255,255,255,0.25);
   }
 
- .container {
+.container {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -72,7 +72,7 @@
     padding: 20px;
   }
 
- .card {
+.card {
     background: rgba(0, 0, 0, 0.4);
     padding: 35px 25px 25px 25px;
     border-radius: 20px;
@@ -99,7 +99,7 @@
     text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
   }
 
- .typewriter {
+.typewriter {
     display: inline-block;
     overflow: hidden;
     border-right: 2px solid #fff;
@@ -111,7 +111,7 @@
     50% { border-color: transparent; }
   }
 
- .btn-group {
+.btn-group {
     display: flex;
     justify-content: center;
     gap: 25px;
@@ -119,7 +119,7 @@
     margin-bottom: 15px;
   }
 
- .wa-btn {
+.wa-btn {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -133,11 +133,11 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   }
 
- .wa-btn:hover {
+.wa-btn:hover {
     transform: scale(1.15);
   }
 
- .wa-btn svg {
+.wa-btn svg {
     width: 28px;
     height: 28px;
     fill: white;
@@ -148,14 +148,14 @@
     background: #ff4757;
   }
 
- .footer {
+.footer {
     margin-top: 20px;
     font-size: 0.75em;
     color: rgba(255,255,255,0.6);
     font-family: 'Segoe UI', sans-serif;
   }
 
- .hidden { display: none; }
+.hidden { display: none; }
 
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
@@ -190,11 +190,7 @@
   </video>
   <div class="overlay"></div>
 
-  <audio id="bg-audio" loop>
-    <source src="https://raw.githubusercontent.com/Sdeveandteam/buatkamu/main/Sabar%20-%20Sadewok%20Official%20Music%20Video.mp3" type="audio/mpeg">
-  </audio>
-
-  <button id="sound-btn" onclick="toggleSound()">🔇 Nyalain Lagu</button>
+  <button id="sound-btn" onclick="toggleSound()">🔇 Nyalain Suara</button>
 
   <div class="container">
     <div class="card" data-aos="zoom-in" data-aos-duration="800">
@@ -243,7 +239,6 @@ AOS.init();
 let step = 1;
 let soundOn = false;
 const video = document.getElementById('bg-video');
-const audio = document.getElementById('bg-audio');
 const nomorWA = "62895351432524";
 const pesanWA = "Aku udah baca suratnya...";
 
@@ -282,15 +277,7 @@ function nextStep(n) {
 function toggleSound() {
   soundOn =!soundOn;
   video.muted =!soundOn;
-  audio.muted =!soundOn;
-
-  if(soundOn) {
-    audio.play();
-    document.getElementById('sound-btn').innerHTML = '🔊 Lagu Nyala';
-  } else {
-    audio.pause();
-    document.getElementById('sound-btn').innerHTML = '🔇 Nyalain Lagu';
-  }
+  document.getElementById('sound-btn').innerHTML = soundOn? '🔊 Suara Nyala' : '🔇 Nyalain Suara';
 }
 
 window.onload = () => {
